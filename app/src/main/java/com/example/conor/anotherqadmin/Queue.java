@@ -1,8 +1,17 @@
 package com.example.conor.anotherqadmin;
 
+
+
+//References:
+// http://stackoverflow.com/questions/38551013/android-firebase-retrieve-data-from-child-node
+//https://www.youtube.com/playlist?list=PLGCjwl1RrtcSi2oV5caEVScjkM6r3HO9t - TVAC Studios
+//
+//
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -20,6 +29,7 @@ public class Queue extends AppCompatActivity {
 
     private ListView lQueue;
     private DatabaseReference mDatabase;
+    private Button bNext;
 
     private ArrayList<String> mName = new ArrayList<>();
     private ArrayList<String> mKey = new ArrayList<>();
@@ -31,9 +41,10 @@ public class Queue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
 
-
+        bNext = (Button) findViewById(R.id.bNext);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.keepSynced(true);
         lQueue = (ListView) findViewById(R.id.lQueue);
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_2, mName);
